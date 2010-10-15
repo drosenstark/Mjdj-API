@@ -1,9 +1,12 @@
-#java specific
+test.xml
+settings.xml
 *.class
-
-## generic files to ignore
-*~
-*.lock
-*.DS_Store
-*.swp
-*.out
+MjdjMidiMorph/Mjdj.app/Contents/Resources/Java/Mjdj.jar
+MjdjMidiMorph/Mjdj.app/Contents/Resources/Java/MjdjApi.jar
+*.dmg
+MjdjOnWindows/lib/Mjdj.jar
+MjdjOnWindows/lib/MjdjApi.jar
+.settings
+.pmd
+.classpath
+doc
