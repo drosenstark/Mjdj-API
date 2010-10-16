@@ -24,35 +24,41 @@ import com.confusionists.mjdjApi.midi.MessageWrapper;
 import com.confusionists.mjdjApi.morph.Morph;
 
 /**
- * MjdjService is the gateway into the Mjdj system: all access is provided through a provided instance of this class.
+ * MjdjService is the gateway into the Mjdj system: all access to Mjdj is given through a provided MjdjService instance.
  * @author DanielRosenstark [at_sign] confusionists.com
  */
-public interface MjdjService { // NOPMD by DanielRosenstark [at_sign] confusionists.com on 10/3/10 8:28 PM
+public interface MjdjService {
 
 	/**
-	 *   Morphs use log methods to display to the Mjdj out 
+	 *  Display to the Mjdj logging pane.
 	 */
 	void log(String text);
 
 	/**
-	 *   Morphs use log methods to display to the Mjdj out 
+	 *   Display to the Mjdj logging pane.
 	 */
 	void log(String string, Exception exception);
 	
 	
 	/**
-	 *  Morphs use these methods to display to the Mjdj out if debugging is on */
+	 *  Display to the Mjdj  logging pane if debugging is on */
 	void debugLog(String text);
+	/**
+	 *  Display to the Mjdj  logging pane if debugging is on */
 	void debugLog(String string, Exception exception);
 
+
 	/**
-	 *  used by MIDI devices to send messages into Mjdj for morphing. Morphs that use this method should take care to avoid feedback loops. */
+	 * Send messages to the Mjdj morphs.
+	 * @param message
+	 * @param from The name of the MIDI Device that received the message. Morphs receive this name in their process method, which may be used for filtering.
+	 */
 	void morph(MessageWrapper message, String from);
 	
 	/**
 	 * @param message
 	 * @param from can be null, name of the device the message is (pretending to be) from
-	 * @param avoidMorph can be null. Only Morphs lower on the list than the afterMorph will get the message
+	 * @param afterMorph can be null. It's a String that matches the getName() of the afterMorph. Only morphs lower on the list than the afterMorph will get the message
 	 */
 	void morph(MessageWrapper message, String from, Morph afterMorph);
 	
@@ -61,16 +67,34 @@ public interface MjdjService { // NOPMD by DanielRosenstark [at_sign] confusioni
 	 *  Sends to all outbound MIDI devices   */
 	void send(MessageWrapper message);
 
-	/** Sends to all outbound MIDI devices with names in `to` list */
+	/** 
+	 * @param message
+	 * @param sendToNames List of names of outbound MIDI devices which will receive the message.
+	 */
 	void send(MessageWrapper message, List<String> sendToNames);
 
+	/**
+	 * 
+	 * @param message
+	 * @param sendToName On the device matching this name is sent the message
+	 */
 	void send(MessageWrapper message, String sendToName);
 
 
-
+	/**
+	 * 
+	 * @param bytes Raw midi message
+	 * @param sendToNames List of names of outbound MIDI devices which will receive the message.
+	 * @throws InvalidMidiDataException
+	 */
 	void send(byte[] bytes, List<String> sendToNames)
 			throws InvalidMidiDataException;
 
+	/**
+	 * Send to all output MIDI devices
+	 * @param bytes
+	 * @throws InvalidMidiDataException
+	 */
 	void send(byte[] bytes) throws InvalidMidiDataException;
 
 	/**
@@ -87,9 +111,6 @@ public interface MjdjService { // NOPMD by DanielRosenstark [at_sign] confusioni
 	 */
 	boolean isMorphActive(String name);
 	
-	int compareMorphToMorph(Morph one, Morph two);
-	
-
 	/*
 	 * sends most keystrokes, otherwise just use Java.awt.Robot yourself, no
 	 * problems
