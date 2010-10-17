@@ -132,7 +132,7 @@ public interface MjdjService {
 	boolean schedule(MidiTimerTask task, int beatsBeforeLaunch);
 
 	/**
-	 * Schedules the task to fire at beatsBeforeLaunch quarter-notes plus delayAfterBeat milliseconds.
+	 * Schedules the task to fire at beatsBeforeLaunch quarter-notes plus delayAfterBeat in proportion of one beat.
 	 * @param task 
 	 * @param beatsBeforeLaunch
 	 * @param delayAfterBeat - in proportion of a beat
