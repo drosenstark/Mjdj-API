@@ -41,6 +41,11 @@ public interface DeviceWrapper {
 	String toString();
 
 	 String getName();
+	 
+	 /**
+	  * Implementers can just do nothing in this method if there is no UI to show 
+	  */
+	 void toggleUi();
 
 
 }

@@ -49,6 +49,10 @@ public abstract class AbstractDeviceWrapper implements DeviceWrapper {
     public String toString() {
     		return getName();
     }
+    
+    public void toggleUi() {
+    		// do nothing by default
+    }
 	
 
 }
