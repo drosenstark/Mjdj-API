@@ -55,14 +55,14 @@ public class MessageWrapper {
 	/**
 	 *  Static Factory Method 
 	 */
-	public static MessageWrapper newInstance(ChannelCc channelCc, int data2) {
+	public static ShortMessageWrapper newInstance(ChannelCc channelCc, int data2) {
 		final ShortMessage message = new ShortMessage();
 		try {
 			message.setMessage(ShortMessage.CONTROL_CHANGE, channelCc.channel, channelCc.cc, data2);
 		} catch (InvalidMidiDataException e) {
 			throw new RuntimeException(e);
 		}
-		return new MessageWrapper(message);
+		return new ShortMessageWrapper(message);
 	}
 
 

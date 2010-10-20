@@ -67,6 +67,8 @@ public interface Morph {
 	 * @throws Exception
 	 */
 	boolean process(MessageWrapper message, String from) throws Throwable;
+	
+	void onBeat() throws Throwable;
 
 	/**
 	 * @return Any useful logging information that implementing classes wish to return when the Morph checks that it is working correctly.

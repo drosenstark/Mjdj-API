@@ -23,13 +23,14 @@ import com.confusionists.mjdjApi.midi.MessageWrapper;
 import com.confusionists.mjdjApi.midi.ShortMessageWrapper;
 import com.confusionists.mjdjApi.morph.Morph;
 
-/* MjdjService instance has scheduling methods for this task. 
+/**
+ *  MjdjService instance has scheduling methods for this task. 
  * *  Instantiate a MidiTimerTask instance, init it, and then schedule it with your MjdjService instance. 
  * * Subclasses that do not use one of the given init methods must make sure all relevant instance variables have values.
  * */
 public class MidiTimerTask extends TimerTask {
 
-	private volatile MessageWrapper payload; // this must be delcared as volatile so all changes to the payload are seen from all threads instantly
+	private volatile MessageWrapper payload; // this must be declared as volatile so all changes to the payload are seen from all threads instantly
 	protected transient MjdjService service;
 	private Morph morph;
 	protected transient List<String> deviceNames = null;

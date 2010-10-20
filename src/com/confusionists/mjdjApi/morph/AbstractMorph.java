@@ -68,6 +68,7 @@ public abstract class AbstractMorph implements Morph  {
 		return this.outDeviceNames;
 	}
 
+	public void onBeat() throws Throwable {}
 	
 
 	
