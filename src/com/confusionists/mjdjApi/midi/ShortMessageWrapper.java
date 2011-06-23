@@ -23,8 +23,9 @@ public class ShortMessageWrapper extends MessageWrapper {
 	 * <P>Will also return false if the message is not a ShortMessage instance.</P>
 	 */
 	public boolean filter(int command, ChannelCc channelCc) {
-		if (channelCc == null)
-			throw new IllegalArgumentException("channelCc cannot be null");
+		if (channelCc == null) {
+			return false;
+		}
 		final ShortMessage shortMessage = getShortMessage();
 		
 		// check backwards because it's usually faster
@@ -105,9 +106,19 @@ public class ShortMessageWrapper extends MessageWrapper {
 		return this.getShortMessage().getCommand();
 	}
 
+	public int getChannel() {
+		return this.getShortMessage().getChannel();
+	}
+	
+	
 	public boolean isControlChange() {
 		return getCommand() == ShortMessage.CONTROL_CHANGE;
 	}
+	
+	public boolean isPItchBend() {
+		return getCommand() == ShortMessage.PITCH_BEND;
+	}
+	
 
 	public boolean isNoteOn() {
 		return getCommand() == ShortMessage.NOTE_ON;
@@ -142,9 +153,8 @@ public class ShortMessageWrapper extends MessageWrapper {
 	 * Convenience override for debugging.
 	 */
 	public String toString() {
-		return this.getShortMessage().getChannel() + " " + this.getShortMessage().getData1() + " " + this.getShortMessage().getData2();
+		return (this.getShortMessage().getChannel()+1) + " " + this.getShortMessage().getData1() + " " + this.getShortMessage().getData2();
 	}
-	
-	
+
 
 }

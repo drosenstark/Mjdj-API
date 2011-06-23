@@ -86,7 +86,7 @@ public class ChannelCc {
 	
 	@Override
 	public String toString() {
-		return "channel=" + channel + ", cc=" + cc;
+		return "channel=" + (channel+1) + ", cc=" + cc;
 	}
 	
 	
