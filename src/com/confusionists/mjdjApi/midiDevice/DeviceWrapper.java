@@ -16,6 +16,8 @@ You may contact the author at mjdj_api [at] confusionists.com
 
 package com.confusionists.mjdjApi.midiDevice;
 
+import java.util.ArrayList;
+
 import com.confusionists.mjdjApi.util.MjdjService;
 
 /**
@@ -46,6 +48,8 @@ public interface DeviceWrapper {
 	  * Implementers can just do nothing in this method if there is no UI to show 
 	  */
 	 void toggleUi();
+	
+      void makeNewId(ArrayList<String> existingIds);
 
 
 }
