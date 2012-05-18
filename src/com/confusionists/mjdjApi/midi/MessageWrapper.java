@@ -100,13 +100,16 @@ public class MessageWrapper {
 		return message;
 	}
 
-	
-
-
-
 	/**
-	 *  good to have around: see the MidiMessage documentation for the meaning of this 
-	 * */
+	 *  good to have around: from MidiMessage documentation: 
+	 * 
+	 * <code>MidiMessage</code> returns MIDI status bytes as integers.  If you are
+	 * processing MIDI data that originated outside Java Sound and now
+	 * is encoded as signed bytes, the bytes can
+	 * can be converted to integers using this conversion:
+	 * <center><code>int i = (int)(byte & 0xFF)</code></center>
+	 *  
+	 **/
 	public static int getInt(byte value) {
 		return 0xFF & value;
 	}
