@@ -16,7 +16,6 @@ You may contact the author at mjdj_api [at] confusionists.com
 
 package com.confusionists.mjdjApi.midiDevice;
 
-import java.util.ArrayList;
 
 import com.confusionists.mjdjApi.util.MjdjService;
 
@@ -31,18 +30,22 @@ public abstract class AbstractDeviceWrapper implements DeviceWrapper {
 	private boolean active;
 	protected MjdjService service;
 
+	@Override
 	public void setService(final MjdjService service) {
 		this.service = service;
 	}
 	
+	@Override
 	public MjdjService getService() {
 		return service;
 	}
 
+	@Override
 	public void setActive(final boolean active) {
 		this.active = active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return active;
 	}
@@ -52,7 +55,8 @@ public abstract class AbstractDeviceWrapper implements DeviceWrapper {
     		return getName();
     }
     
-    public void toggleUi() {
+    @Override
+	public void toggleUi() {
     		// do nothing by default
     }
 	

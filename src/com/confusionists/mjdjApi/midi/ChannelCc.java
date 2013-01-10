@@ -75,6 +75,7 @@ public class ChannelCc {
 		JButton retVal = new JButton(title);
 		retVal.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				MessageWrapper message = MessageWrapper.newInstance(ChannelCc.this, 127);
 				service.send(message);

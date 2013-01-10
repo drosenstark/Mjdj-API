@@ -36,6 +36,7 @@ public abstract class AbstractMorph implements Morph  {
 	/**
 	 * Called before the Morph is taken out of service, e.g., if Morphs are reloaded or if the system is shutting down.
 	 */
+	@Override
 	public void shutdown() {
 		setPlayTimedTasks(false);
 	}
@@ -43,6 +44,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#setInDeviceNames(java.util.List)
 	 */
+	@Override
 	public void setInDeviceNames(List<String> value) {
 		this.inDeviceNames = value;
 	}
@@ -50,6 +52,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#getInDeviceNames()
 	 */
+	@Override
 	public List<String> getInDeviceNames() {
 		return this.inDeviceNames;
 	}
@@ -57,6 +60,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#setOutDeviceNames(java.util.List)
 	 */
+	@Override
 	public void setOutDeviceNames(List<String> value) {
 		this.outDeviceNames = value;
 	}
@@ -64,10 +68,12 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#getOutDeviceNames()
 	 */
+	@Override
 	public List<String> getOutDeviceNames() {
 		return this.outDeviceNames;
 	}
 
+	@Override
 	public void onBeat() throws Throwable {}
 	
 
@@ -75,6 +81,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#setService(com.confusionists.mjdjApi.util.MjdjService)
 	 */
+	@Override
 	public void setService(MjdjService service) {
 		this.service = service;
 	}
@@ -86,6 +93,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#toggleUi()
 	 */
+	@Override
 	public void toggleUi() {
 		service.log(getName() + " has no UI to show.");
 	}
@@ -94,6 +102,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#setPlayTimedTasks(boolean)
 	 */
+	@Override
 	public void setPlayTimedTasks(boolean playTimedTasks) {
 		this.playTimedTasks = playTimedTasks;
 	}
@@ -101,6 +110,7 @@ public abstract class AbstractMorph implements Morph  {
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#isPlayTimedTasks()
 	 */
+	@Override
 	public boolean isPlayTimedTasks() {
 		return playTimedTasks;
 	}

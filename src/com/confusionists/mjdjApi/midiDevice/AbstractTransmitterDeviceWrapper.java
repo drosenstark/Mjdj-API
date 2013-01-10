@@ -27,11 +27,13 @@ public abstract class AbstractTransmitterDeviceWrapper extends AbstractDeviceWra
 	private boolean clockSource; // whether this instance is being used as the clocksource my Mjdj
 
 	
+	@Override
 	public boolean isClockSource() {
 		return clockSource;
 	}
 
 	
+	@Override
 	public void setClockSource(final boolean value) {
 		this.clockSource = value;
 	}

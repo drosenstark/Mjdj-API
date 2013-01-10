@@ -40,6 +40,7 @@ public interface DeviceWrapper {
 
 	void open() throws DeviceUnavailableException;
 
+	@Override
 	String toString();
 
 	 String getName();
