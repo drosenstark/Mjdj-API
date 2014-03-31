@@ -115,7 +115,7 @@ public class ShortMessageWrapper extends MessageWrapper {
 		return getCommand() == ShortMessage.CONTROL_CHANGE;
 	}
 	
-	public boolean isPItchBend() {
+	public boolean isPitchBend() {
 		return getCommand() == ShortMessage.PITCH_BEND;
 	}
 	
@@ -126,6 +126,19 @@ public class ShortMessageWrapper extends MessageWrapper {
 
 	public boolean isNoteOff() {
 		return getCommand() == ShortMessage.NOTE_OFF;
+	}
+	
+	public boolean isNoteOnVolumeZero() {
+		return isNoteOn() && getData2() == 0;
+	}
+	
+	
+	public boolean isSameChannelCcAs(ShortMessageWrapper wrapper) {
+		if (wrapper.getChannel() != getChannel())
+			return false;
+		if (wrapper.getData1() != getData1())
+			return false;
+		return true;
 	}
 
 	/**
