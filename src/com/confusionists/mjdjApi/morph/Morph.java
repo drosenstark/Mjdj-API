@@ -22,6 +22,9 @@ import com.confusionists.mjdjApi.util.MidiTimerTask;
 import com.confusionists.mjdjApi.util.MjdjService;
 
 public interface Morph {
+	
+	public final static String OTHER_MORPHS = "Other Morphs";
+
 
 	/**
 	 * Call by Mjdj before init is called. Subclasses can generally inherit this default implementation.

@@ -61,6 +61,18 @@ public class ShortMessageWrapper extends MessageWrapper {
 
 	}
 	
+	/** 
+	 * Replaces the guts of (the guts of) this wrapper.<BR>Particularly useful is more than one object shares this wrapper.
+	 */
+	public void alterChannel(int channel) {
+		try {
+			final ShortMessage sMessage = getShortMessage();
+			sMessage.setMessage(sMessage.getCommand(), channel, sMessage.getData1(), sMessage.getData2());
+		} catch (InvalidMidiDataException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 	
 	
 	/** 

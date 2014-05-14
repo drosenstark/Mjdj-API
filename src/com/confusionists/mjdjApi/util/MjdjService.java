@@ -76,7 +76,7 @@ public interface MjdjService {
 	/**
 	 * 
 	 * @param message
-	 * @param sendToName On the device matching this name is sent the message
+	 * @param sendToName On the device matching this name is sent the message; if the sendToName is null, send(MessageWrapper) is used instead
 	 */
 	void send(MessageWrapper message, String sendToName);
 
