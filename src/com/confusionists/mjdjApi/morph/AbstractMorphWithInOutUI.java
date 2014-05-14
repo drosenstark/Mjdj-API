@@ -10,17 +10,15 @@ You may contact the author at mjdj_midi_morph [at] confusionists.com
 */
 package com.confusionists.mjdjApi.morph;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
 import com.confusionists.mjdjApi.midi.MessageWrapper;
-import com.confusionists.mjdjApi.morph.DeviceNotFoundException;
-import com.confusionists.mjdjApi.morph.AbstractMorph;
-import com.confusionists.mjdjApi.morph.ui.*;
+import com.confusionists.mjdjApi.morph.ui.Ui;
+import com.confusionists.mjdjApi.morph.ui.UiRow;
 
 
-public abstract class AbstractMorphWithUI extends AbstractMorph {
+public abstract class AbstractMorphWithInOutUI extends AbstractMorph {
 	private final static String ANY = "All Active";
 	Ui ui = null;
 	List<String> inDeviceNames;
@@ -36,9 +34,6 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		assert(ui == null);
 		
 		ui = new Ui(this, getInDeviceNames(), getOutDeviceNames());
-		
-		getOutDeviceNames().add(0, ANY);
-		getOutDeviceNames().add(OTHER_MORPHS);
 	}
 			
 	@Override
