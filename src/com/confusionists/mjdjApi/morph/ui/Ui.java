@@ -21,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.confusionists.mjdjApi.morph.AbstractMorphWithInOutUI;
+import com.confusionists.mjdjApi.morph.AbstractMorphWithUI;
 import com.confusionists.mjdjApi.morph.Morph;
 
 import net.miginfocom.swing.MigLayout;
@@ -40,7 +40,7 @@ public class Ui extends JFrame {
 	private Object stateOnShow;	
 	
 	
-	public Ui(AbstractMorphWithInOutUI morph,  List<String> inDevices, List<String> outDevices)  {
+	public Ui(AbstractMorphWithUI morph,  List<String> inDevices, List<String> outDevices)  {
 		this.morph = morph;
 		this.inDevices = inDevices;
 		this.outDevices = outDevices;

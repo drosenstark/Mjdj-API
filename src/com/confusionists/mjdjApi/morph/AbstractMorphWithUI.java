@@ -18,7 +18,7 @@ import com.confusionists.mjdjApi.morph.ui.Ui;
 import com.confusionists.mjdjApi.morph.ui.UiRow;
 
 
-public abstract class AbstractMorphWithInOutUI extends AbstractMorph {
+public abstract class AbstractMorphWithUI extends AbstractMorph {
 	private final static String ANY = "All Active";
 	Ui ui = null;
 	List<String> inDeviceNames;
@@ -73,12 +73,17 @@ public abstract class AbstractMorphWithInOutUI extends AbstractMorph {
 	
 	
 
-	public  boolean processAndSend(MessageWrapper message, String to) {
+	protected abstract boolean processAndSend(MessageWrapper message, String to);
+	
+	
+	protected boolean defaultProcessAndSend(MessageWrapper message, String to) {
 		getService().send(message, to);
 		return true;
 	}
 
-	public  boolean processAndSendToOtherMorphs(MessageWrapper message) {
+	protected abstract boolean processAndSendToOtherMorphs(MessageWrapper message);
+	
+	protected  boolean defaultProcessAndSendToOtherMorphs(MessageWrapper message) {
 		getService().morph(message, OTHER_MORPHS, this);
 		return true;
 	}

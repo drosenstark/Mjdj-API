@@ -144,6 +144,9 @@ public class ShortMessageWrapper extends MessageWrapper {
 		return isNoteOn() && getData2() == 0;
 	}
 	
+	public boolean isNoteOnOrOff() {
+		return isNoteOn() || isNoteOff();
+	}
 	
 	public boolean isSameChannelCcAs(ShortMessageWrapper wrapper) {
 		if (wrapper.getChannel() != getChannel())
@@ -180,6 +183,7 @@ public class ShortMessageWrapper extends MessageWrapper {
 	public String toString() {
 		return (this.getShortMessage().getChannel()+1) + " " + this.getShortMessage().getData1() + " " + this.getShortMessage().getData2();
 	}
+
 
 
 }
