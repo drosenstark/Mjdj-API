@@ -53,7 +53,7 @@ public class MessageWrapper {
 	}
 
 	/**
-	 *  Static Factory Method 
+	 *  Static Factory Method for Control Change
 	 */
 	public static ShortMessageWrapper newInstance(ChannelCc channelCc, int data2) {
 		final ShortMessage message = new ShortMessage();

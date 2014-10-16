@@ -122,6 +122,9 @@ public class ShortMessageWrapper extends MessageWrapper {
 		return this.getShortMessage().getChannel();
 	}
 	
+	public ChannelCc getChannelCc() {
+		return new ChannelCc(this.getShortMessage());
+	}
 	
 	public boolean isControlChange() {
 		return getCommand() == ShortMessage.CONTROL_CHANGE;
@@ -144,6 +147,17 @@ public class ShortMessageWrapper extends MessageWrapper {
 		return isNoteOn() && getData2() == 0;
 	}
 	
+	public boolean isNoteOffOrNoteOnVolumeZero() {
+		return isNoteOff() && getData2() == 0;
+	}
+	
+	public boolean isNoteOnOrOff() {
+		return isNoteOn() || isNoteOff();
+	}
+
+	public boolean isAftertouch() {
+		return getCommand() == ShortMessage.POLY_PRESSURE;
+	}
 	
 	public boolean isSameChannelCcAs(ShortMessageWrapper wrapper) {
 		if (wrapper.getChannel() != getChannel())
@@ -180,6 +194,7 @@ public class ShortMessageWrapper extends MessageWrapper {
 	public String toString() {
 		return (this.getShortMessage().getChannel()+1) + " " + this.getShortMessage().getData1() + " " + this.getShortMessage().getData2();
 	}
+
 
 
 }

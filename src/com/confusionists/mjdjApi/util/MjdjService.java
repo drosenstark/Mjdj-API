@@ -35,6 +35,12 @@ public interface MjdjService {
 	void log(String text);
 
 	/**
+	 *  Display a line to the Mjdj logging pane.
+	 */
+	void logLine();
+	
+	
+	/**
 	 *   Display to the Mjdj logging pane.
 	 */
 	void log(String string, Exception exception);

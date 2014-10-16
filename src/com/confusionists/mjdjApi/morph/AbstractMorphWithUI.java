@@ -10,14 +10,12 @@ You may contact the author at mjdj_midi_morph [at] confusionists.com
 */
 package com.confusionists.mjdjApi.morph;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
 import com.confusionists.mjdjApi.midi.MessageWrapper;
-import com.confusionists.mjdjApi.morph.DeviceNotFoundException;
-import com.confusionists.mjdjApi.morph.AbstractMorph;
-import com.confusionists.mjdjApi.morph.ui.*;
+import com.confusionists.mjdjApi.morph.ui.Ui;
+import com.confusionists.mjdjApi.morph.ui.UiRow;
 
 
 public abstract class AbstractMorphWithUI extends AbstractMorph {
@@ -36,9 +34,6 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		assert(ui == null);
 		
 		ui = new Ui(this, getInDeviceNames(), getOutDeviceNames());
-		
-		getOutDeviceNames().add(0, ANY);
-		getOutDeviceNames().add(OTHER_MORPHS);
 	}
 			
 	@Override
@@ -78,12 +73,17 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 	
 	
 
-	public  boolean processAndSend(MessageWrapper message, String to) {
+	protected abstract boolean processAndSend(MessageWrapper message, String to);
+	
+	
+	protected boolean defaultProcessAndSend(MessageWrapper message, String to) {
 		getService().send(message, to);
 		return true;
 	}
 
-	public  boolean processAndSendToOtherMorphs(MessageWrapper message) {
+	protected abstract boolean processAndSendToOtherMorphs(MessageWrapper message);
+	
+	protected  boolean defaultProcessAndSendToOtherMorphs(MessageWrapper message) {
 		getService().morph(message, OTHER_MORPHS, this);
 		return true;
 	}
@@ -91,6 +91,8 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 	
 	@Override
 	public boolean process(MessageWrapper message, String from) throws Exception {
+		
+		
 		// we should put in a safeguard for not sending twice, but for now we'll leave it alone
 		boolean retVal = false;
 		for (UiRow row : ui.rows) {
@@ -112,6 +114,20 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		}
 		
 		return retVal;
+	}
+	
+	public void sendToAll(MessageWrapper message) {
+		for (UiRow row : ui.rows) {
+			boolean enabled = row.isEnabled();
+			String rightName = row.getRightName();
+			if (enabled) {
+				String toName = rightName == ANY ? null : rightName;
+				if (toName != OTHER_MORPHS) {
+					getService().send(message, toName);
+				}
+			}
+		}
+		
 	}
 
 	@Override

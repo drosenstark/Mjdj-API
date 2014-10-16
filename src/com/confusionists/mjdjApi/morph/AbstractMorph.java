@@ -90,6 +90,12 @@ public abstract class AbstractMorph implements Morph  {
 		return service; 
 	}
 	
+	// convenience method
+	public final void log(String text) {
+		getService().log(text);
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see com.confusionists.mjdjApi.morph.Morph#toggleUi()
 	 */
