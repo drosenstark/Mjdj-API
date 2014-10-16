@@ -91,6 +91,8 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 	
 	@Override
 	public boolean process(MessageWrapper message, String from) throws Exception {
+		
+		
 		// we should put in a safeguard for not sending twice, but for now we'll leave it alone
 		boolean retVal = false;
 		for (UiRow row : ui.rows) {
@@ -112,6 +114,20 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		}
 		
 		return retVal;
+	}
+	
+	public void sendToAll(MessageWrapper message) {
+		for (UiRow row : ui.rows) {
+			boolean enabled = row.isEnabled();
+			String rightName = row.getRightName();
+			if (enabled) {
+				String toName = rightName == ANY ? null : rightName;
+				if (toName != OTHER_MORPHS) {
+					getService().send(message, toName);
+				}
+			}
+		}
+		
 	}
 
 	@Override

@@ -79,13 +79,15 @@ public interface Morph {
 	String diagnose();
 
 	/**
-	 * Subclasses can produce a UI that is as complicated as they like for each Morph. It should become visible (and even always-on-top) when this method is called, or the opposite.
+	 * Subclasses can produce a UI that is as complicated as they like for each Morph. 
+	 * It should become visible (and even always-on-top) when this method is called, or the opposite (toggle)
 	 */
 	void toggleUi();
 
 	/**
-	 * This is very limited: any class can be serialized, even one that doesn't implement Serializable, but the class cannot contain any reference to classes
-	 * dynamically loaded in this Morph. Essentially, use Hashtable<String, String> or anything in the JDK itself.
+	 * This is very limited: any class can be serialized, even one that doesn't implement Serializable, but the class 
+	 * cannot contain any reference to classes dynamically loaded in this Morph. 
+	 * Essentially, use Hashtable<String, String> or anything in the JDK itself.
 	 * @return the serializable "piece" for configuring this Morph.
 	 */
 	Object getSerializable();
