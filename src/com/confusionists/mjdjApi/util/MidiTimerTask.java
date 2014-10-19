@@ -17,7 +17,6 @@ You may contact the author at mjdj_api [at] confusionists.com
 package com.confusionists.mjdjApi.util;
 
 import java.util.List;
-import java.util.TimerTask;
 
 import com.confusionists.mjdjApi.midi.MessageWrapper;
 import com.confusionists.mjdjApi.midi.ShortMessageWrapper;
@@ -28,7 +27,7 @@ import com.confusionists.mjdjApi.morph.Morph;
  * *  Instantiate a MidiTimerTask instance, init it, and then schedule it with your MjdjService instance. 
  * * Subclasses that do not use one of the given init methods must make sure all relevant instance variables have values.
  * */
-public class MidiTimerTask extends TimerTask {
+public class MidiTimerTask  {
 
 	private volatile MessageWrapper payload; // this must be declared as volatile so all changes to the payload are seen from all threads instantly
 	protected transient MjdjService service;
@@ -78,7 +77,6 @@ public class MidiTimerTask extends TimerTask {
 	 * beat as it was scheduled with the MjdjService instance. Subclasses may override this to do fancier
 	 * and/or other functionality.
 	 **/
-	@Override
 	public void run() {
 		if (!morph.isPlayTimedTasks())
 			return;
