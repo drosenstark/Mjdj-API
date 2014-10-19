@@ -19,6 +19,7 @@ import com.confusionists.mjdjApi.morph.ui.UiRow;
 
 
 public abstract class AbstractMorphWithUI extends AbstractMorph {
+    private final static String NONE = "None";
 	private final static String ANY = "All Active";
 	Ui ui = null;
 	List<String> inDeviceNames;
@@ -47,7 +48,8 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		if (inDeviceNames == null) {
 			List<String> original = super.inDeviceNames;
 			inDeviceNames = new ArrayList<String>(original);
-			inDeviceNames.add(0, ANY);
+            inDeviceNames.add(0, ANY);
+            inDeviceNames.add(0, NONE);
 			if (this.allowInputFromOtherMorphs()) {
 				inDeviceNames.add(OTHER_MORPHS);
 			}
@@ -61,7 +63,8 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		if (outDeviceNames == null) {
 			List<String> original = super.outDeviceNames;
 			outDeviceNames = new ArrayList<String>(original);
-			outDeviceNames.add(0, ANY);
+            outDeviceNames.add(0, ANY);
+            outDeviceNames.add(0, NONE);
 			if (this.allowOutputToOtherMorphs()) {
 				outDeviceNames.add(OTHER_MORPHS);
 			}
@@ -73,7 +76,7 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 	
 	
 
-	protected abstract boolean processAndSend(MessageWrapper message, String to);
+	protected abstract boolean processAndSend(MessageWrapper message, String from, String to);
 	
 	
 	protected boolean defaultProcessAndSend(MessageWrapper message, String to) {
@@ -106,7 +109,7 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 						retVal = true;
 					}
 				} else {
-					if (processAndSend(message, toName)) {
+					if (processAndSend(message, from, toName)) {
 						retVal = true;
 					}
 				}
@@ -115,7 +118,21 @@ public abstract class AbstractMorphWithUI extends AbstractMorph {
 		
 		return retVal;
 	}
-	
+
+    public void sendToAllFeedback(MessageWrapper message) {
+        for (UiRow row : ui.rows) {
+            boolean enabled = row.isEnabled();
+            String leftName = row.getLeftName();
+            if (enabled) {
+                String toName = leftName == ANY ? null : leftName;
+                if (toName != OTHER_MORPHS) {
+                    getService().send(message, toName);
+                }
+            }
+        }
+
+    }
+
 	public void sendToAll(MessageWrapper message) {
 		for (UiRow row : ui.rows) {
 			boolean enabled = row.isEnabled();
